@@ -32,7 +32,7 @@ async function joinMeeting(params, callback) {
     .then(async (response) => {
       await meeting.findOneAndUpdate(
         { _id: params.meetingId },
-        { $addToSet: { meetingUser: meetingUserModel } }
+        { $addToSet: { meetingUsers: meetingUserModel } }
       );
       return callback(null, response);
     })
