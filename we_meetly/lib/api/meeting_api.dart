@@ -26,7 +26,6 @@ Future<http.Response?> startMeeting() async {
 Future<http.Response> joinMeeting(String meetingId) async {
   var response =
       await http.get(Uri.parse("$MEETING_API_URL/join?meetingId=$meetingId"));
-  print(response);
 
   if (response.statusCode >= 200 && response.statusCode < 400) {
     return response;

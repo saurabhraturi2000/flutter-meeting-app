@@ -4,8 +4,8 @@ exports.startMeeting = async (req, res, next) => {
   const { hostId, hostName } = req.body;
 
   var model = {
-    hostId,
-    hostName,
+    hostId: hostId,
+    hostName: hostName,
     startTime: Date.now(),
   };
 

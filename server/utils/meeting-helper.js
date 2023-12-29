@@ -1,9 +1,9 @@
-const { Meeting } = require("../models/meeting.model");
 const meetingServices = require("../services/meeting.service");
-const { MeetingPayLoadEnum } = require("./meeting-payload.enum");
+const { MeetingPayLoadEnum } = require("../utils/meeting-payload.enum");
 
 async function joinMeeting(meetingId, socket, meetingServer, payload) {
   const { userId, name } = payload.data;
+
   meetingServices.isMeetingPresent(meetingId, async (error, results) => {
     if (error && !results) {
       sendMessage(socket, {
@@ -44,7 +44,7 @@ function forwardConnectionRequest(meetingId, socket, meetingServer, payload) {
   const { userId, otherUserId, name } = payload.data;
 
   var model = {
-    meetingId,
+    meetingId: meetingId,
     userId: otherUserId,
   };
 
@@ -63,6 +63,7 @@ function forwardConnectionRequest(meetingId, socket, meetingServer, payload) {
     }
   });
 }
+
 function forwardIceCandidate(meetingId, socket, meetingServer, payload) {
   const { userId, otherUserId, candidate } = payload.data;
 
@@ -139,6 +140,7 @@ function userLeft(meetingId, socket, meetingServer, payload) {
     },
   });
 }
+
 function endMeeting(meetingId, socket, meetingServer, payload) {
   const { userId } = payload.data;
 
@@ -174,10 +176,10 @@ function addUser(socket, { meetingId, userId, name }) {
       if (!results) {
         var model = {
           socketId: socket.id,
-          meetingId,
-          userId,
+          meetingId: meetingId,
+          userId: userId,
           joined: true,
-          name,
+          name: name,
           isAlive: true,
         };
 
@@ -192,7 +194,7 @@ function addUser(socket, { meetingId, userId, name }) {
         });
       } else {
         meetingServices.updateMeetingUser(
-          { userId, socketId: socket.id },
+          { userId: userId, socketId: socket.id },
           (error, results) => {
             if (error) {
               reject(error);

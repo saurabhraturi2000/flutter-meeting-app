@@ -44,7 +44,7 @@ async function joinMeeting(params, callback) {
 async function isMeetingPresent(meetingId, callback) {
   meeting
     .findById(meetingId)
-    .populate("meetingUsers", "MeetingUser")
+    .populate("meetingUser", "MeetingUser")
     .then((response) => {
       if (!response) callback("Invalid Meeting Id");
       return callback(null, true);
@@ -68,7 +68,7 @@ async function checkMeetingExists(meetingId, callback) {
 }
 
 async function getMeetingUser(params, callback) {
-  const { meeting, userId } = params;
+  const { meetingId, userId } = params;
 
   meetingUser
     .find({ meetingId, userId })
@@ -98,7 +98,7 @@ async function getUserBySocketId(params, callback) {
     .find({ meetingId, socketId })
     .limit(1)
     .then((response) => {
-      return callback(null, response[0]);
+      return callback(null, response);
     })
     .catch((err) => {
       return callback(err);

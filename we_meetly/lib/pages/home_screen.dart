@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
   formUI() {
     return Center(
       child: Padding(
-        padding: EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -39,6 +39,23 @@ class _HomeScreenState extends State<HomeScreen> {
               "Welcome to WeMeetly",
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.black, fontSize: 25),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            TextFormField(
+              decoration: const InputDecoration(
+                hintText: 'Enter meeting id',
+              ),
+              validator: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter some text';
+                }
+                return null;
+              },
+              onSaved: (value) {
+                meetingId = value!;
+              },
             ),
             const SizedBox(
               height: 20,

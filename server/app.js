@@ -8,6 +8,7 @@ const server = http.createServer(app);
 const { initMeetingServer } = require("./meeting-server");
 
 initMeetingServer(server);
+
 mongoose.promise = global.Promise;
 mongoose
   .connect(MONGO_DB_CONFIG.DB, {})
