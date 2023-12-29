@@ -43,23 +43,23 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(
               height: 20,
             ),
-            TextFormField(
-              decoration: const InputDecoration(
-                hintText: 'Enter meeting id',
-              ),
-              validator: (String? value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter some text';
-                }
-                return null;
-              },
-              onSaved: (value) {
-                meetingId = value!;
-              },
-            ),
-            const SizedBox(
-              height: 20,
-            ),
+            // TextFormField(
+            //   decoration: const InputDecoration(
+            //     hintText: 'Enter meeting id',
+            //   ),
+            //   validator: (String? value) {
+            //     if (value == null || value.isEmpty) {
+            //       return 'Please enter some text';
+            //     }
+            //     return null;
+            //   },
+            //   onSaved: (value) {
+            //     meetingId = value!;
+            //   },
+            // ),
+            // const SizedBox(
+            //   height: 20,
+            // ),
             FormHelper.inputFieldWidget(
               context,
               "meetingId",

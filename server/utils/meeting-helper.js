@@ -86,6 +86,7 @@ function forwardIceCandidate(meetingId, socket, meetingServer, payload) {
     }
   });
 }
+
 function forwardOfferSDP(meetingId, socket, meetingServer, payload) {
   const { userId, otherUserId, sdp } = payload.data;
 
@@ -108,6 +109,7 @@ function forwardOfferSDP(meetingId, socket, meetingServer, payload) {
     }
   });
 }
+
 function forwardAnswerSDP(meetingId, socket, meetingServer, payload) {
   const { userId, otherUserId, sdp } = payload.data;
 
@@ -130,6 +132,7 @@ function forwardAnswerSDP(meetingId, socket, meetingServer, payload) {
     }
   });
 }
+
 function userLeft(meetingId, socket, meetingServer, payload) {
   const { userId } = payload.data;
 
