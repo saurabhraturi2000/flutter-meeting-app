@@ -4,7 +4,8 @@ import 'package:http/http.dart' as http;
 
 import 'package:we_meetly/utils/user.util.dart';
 
-String MEETING_API_URL = "https://wemeetly.onrender.com/api/meeting";
+String MEETING_API_URL =
+    "http://192.168.1.154:4000/meeting"; // "https://wemeetly.onrender.com/api/meeting"
 var client = http.Client();
 
 Future<http.Response?> startMeeting() async {

@@ -43,7 +43,7 @@ class _MeetingPageState extends State<MeetingPage> {
   void startMeeting() async {
     final String userId = await loadUserId();
     meetingHelper = WebRTCMeetingHelper(
-      url: "https://wemeetly.onrender.com",
+      url: "http://192.168.1.154:4000", //https://wemeetly.onrender.com
       meetingId: widget.meetingDetail.id,
       userId: userId,
       name: widget.name,

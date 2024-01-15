@@ -175,40 +175,45 @@ function forwardEvent(meetingId, socket, meetingServer, payload) {
 }
 function addUser(socket, { meetingId, userId, name }) {
   let promise = new Promise((resolve, reject) => {
-    meetingServices.addUser(userId, name, meetingId, (error, results) => {
-      if (!results) {
-        var model = {
-          socketId: socket.id,
-          meetingId: meetingId,
-          userId: userId,
-          joined: true,
-          name: name,
-          isAlive: true,
-        };
+    meetingServices.getMeetingUser(
+      userId,
+      name,
+      meetingId,
+      (error, results) => {
+        if (!results) {
+          var model = {
+            socketId: socket.id,
+            meetingId: meetingId,
+            userId: userId,
+            joined: true,
+            name: name,
+            isAlive: true,
+          };
 
-        meetingServices.joinMeeting(model, (error, results) => {
-          if (error) {
-            reject(error);
-          }
-
-          if (results) {
-            resolve(results);
-          }
-        });
-      } else {
-        meetingServices.updateMeetingUser(
-          { userId: userId, socketId: socket.id },
-          (error, results) => {
+          meetingServices.joinMeeting(model, (error, results) => {
             if (error) {
               reject(error);
             }
+
             if (results) {
-              resolve(true);
+              resolve(results);
             }
-          }
-        );
+          });
+        } else {
+          meetingServices.updateMeetingUser(
+            { userId: userId, socketId: socket.id },
+            (error, results) => {
+              if (error) {
+                reject(error);
+              }
+              if (results) {
+                resolve(true);
+              }
+            }
+          );
+        }
       }
-    });
+    );
   });
   return promise;
 }
